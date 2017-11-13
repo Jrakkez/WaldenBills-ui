@@ -32,6 +32,12 @@ module.exports = {
     // (https://github.com/webpack/css-loader#sourcemaps)
     // In our experience, they generally work as expected,
     // just be aware of this issue when enabling this option.
-    cssSourceMap: false
+    cssSourceMap: false,
+    proxyTable:
+      {
+        target: 'http://localhost:4000/', // target host
+        changeOrigin: true,               // needed for virtual hosted sites
+        ws: true                         // proxy websockets
+      }
   }
 }

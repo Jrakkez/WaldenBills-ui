@@ -109,7 +109,7 @@
       }
     },
     beforeCreate () {
-      this.$http.get('/elixir').then(response => {
+      this.$http.get('/api/elixir').then(response => {
         console.log(response)
       }, response => {
         console.error(response)

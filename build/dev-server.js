@@ -21,8 +21,11 @@ var autoOpenBrowser = !!config.dev.autoOpenBrowser
 // Define HTTP proxies to your custom API backend
 // https://github.com/chimurai/http-proxy-middleware
 var proxyTable = config.dev.proxyTable
+var proxy = proxyMiddleware(proxyTable);
 
 var app = express()
+app.use('/api', proxy)
+
 var compiler = webpack(webpackConfig)
 
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
@@ -41,15 +44,6 @@ compiler.plugin('compilation', function (compilation) {
     cb()
   })
 })
-
-// proxy api requests
-/*Object.keys(proxyTable).forEach(function (context) {
-  var options = proxyTable[context]
-  if (typeof options === 'string') {
-   options = { target: options }
-  }
-  app.use(proxyMiddleware(options.filter || context, options))
-})*/
 
 // handle fallback for HTML5 history API
 app.use(require('connect-history-api-fallback')())
